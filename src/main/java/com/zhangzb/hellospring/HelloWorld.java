@@ -22,8 +22,7 @@ public class HelloWorld {
 
     @Autowired
     private  GirlProperties girlProperties;
-    
-//    @RequestMapping(value = {"/say"},method = RequestMethod.GET)
+
     @GetMapping(value = "/say")
     public String sayHello(@RequestParam(value = "id",required = false,defaultValue = "0") Integer myId) {
 
