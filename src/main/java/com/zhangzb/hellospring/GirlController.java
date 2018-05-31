@@ -27,6 +27,8 @@ public class GirlController {
      * @param age
      * @return
      */
+
+
     @PostMapping(value = "/addGirl")
     public Girl addGirl(@RequestParam("cupSize") String cupSize,
                         @RequestParam("age") Integer age){
@@ -37,16 +39,23 @@ public class GirlController {
 
     }
 
-    //查询一个女生
-    @GetMapping(value = "/getGirlById/{id}")
+
+    //查询女生
+    @GetMapping(value = "findGirlById/{id}")
     public Girl searchGirl(@PathVariable("id") Integer id){
-        return girlRepository.getOne(id);
+        return girlRepository.findById(id).get();
     }
 
-//    public Optional<Girl> searchGirl(@PathVariable("id") Integer id){
-//        return girlRepository.findById(id);
-//    }
-//
+
+
+
+    /**
+     * 删除女生
+     * @param id
+     * @param cupSize
+     * @param age
+     * @return
+     */
     @PutMapping(value = "/updateGirl/{id}")
     public  Girl updateGirl(@PathVariable("id") Integer id,
                             @RequestParam("cupSize") String cupSize,
@@ -59,12 +68,26 @@ public class GirlController {
        return girlRepository.save(oneGirl);
     }
 
+    //删除女
     @DeleteMapping(value = "deleteGirl/{id}")
     public void deleteGirl(@PathVariable("id") Integer id) {
       girlRepository.deleteById(id);
     }
 
 
+    /**
+     * 根据年龄罩杯查询
+     * @param age
+     * @param cupSize
+     * @return
+     */
+    @GetMapping(value = "findGirlsByAgeAndCupSize/{age}/{cupSize}")
+    public List<Girl> findGirlByAgeCupSize(@PathVariable("age") Integer age,
+                                           @PathVariable("cupSize") String cupSize){
+
+
+        return girlRepository.findByAgeAndCupSize(age,cupSize);
+    }
 
 
 
