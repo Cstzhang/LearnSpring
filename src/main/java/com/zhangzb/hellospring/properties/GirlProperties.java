@@ -1,4 +1,4 @@
-package com.zhangzb.hellospring;
+package com.zhangzb.hellospring.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

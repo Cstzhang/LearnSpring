@@ -1,10 +1,11 @@
-package com.zhangzb.hellospring;
+package com.zhangzb.hellospring.domain;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 //@EntityScan\
 //@entity
@@ -14,6 +15,8 @@ public class Girl {
     @GeneratedValue
     private Integer id;
     private String cupSize;
+
+    @Min(value = 18,message = "未成年禁止入内!")
     private Integer age;
 
     public Girl() {

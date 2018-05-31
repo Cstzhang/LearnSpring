@@ -1,5 +1,6 @@
-package com.zhangzb.hellospring;
+package com.zhangzb.hellospring.repository;
 
+import com.zhangzb.hellospring.domain.Girl;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,15 +1,21 @@
-package com.zhangzb.hellospring;
+package com.zhangzb.hellospring.controller;
 
+import com.zhangzb.hellospring.domain.Girl;
+import com.zhangzb.hellospring.repository.GirlRepository;
+import com.zhangzb.hellospring.service.GirlService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class GirlController {
     @Autowired
-    private  GirlRepository girlRepository;
+    private GirlRepository girlRepository;
 
     @Autowired
     private GirlService girlService;
@@ -25,17 +31,18 @@ public class GirlController {
 
     /**
      * 添加girl
-     * @param cupSize
-     * @param age
      * @return
      */
 
     @PostMapping(value = "/addGirl")
-    public Girl addGirl(@RequestParam("cupSize") String cupSize,
-                        @RequestParam("age") Integer age){
-        Girl girl = new Girl();
-        girl.setCupSize(cupSize);
-        girl.setAge(age);
+    public Girl addGirl(@Valid Girl girl, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return  null;
+        }
+
+        girl.setCupSize(girl.getCupSize());
+        girl.setAge(girl.getAge());
         return girlRepository.save(girl);
 
     }
@@ -51,7 +58,7 @@ public class GirlController {
     }
 
     /**
-     * 删除女生
+     * 修改女生
      * @param id
      * @param cupSize
      * @param age

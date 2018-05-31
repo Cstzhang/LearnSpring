@@ -1,5 +1,7 @@
-package com.zhangzb.hellospring;
+package com.zhangzb.hellospring.service;
 
+import com.zhangzb.hellospring.domain.Girl;
+import com.zhangzb.hellospring.repository.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,9 +1,9 @@
-package com.zhangzb.hellospring;
+package com.zhangzb.hellospring.controller;
 
 
+import com.zhangzb.hellospring.properties.GirlProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +21,7 @@ public class HelloWorld {
 //    private String content;
 
     @Autowired
-    private  GirlProperties girlProperties;
+    private GirlProperties girlProperties;
 
     @GetMapping(value = "/say")
     public String sayHello(@RequestParam(value = "id",required = false,defaultValue = "0") Integer myId) {
