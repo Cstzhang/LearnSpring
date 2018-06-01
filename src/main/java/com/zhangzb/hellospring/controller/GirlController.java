@@ -2,8 +2,10 @@ package com.zhangzb.hellospring.controller;
 
 import com.zhangzb.hellospring.aspect.HttpAspect;
 import com.zhangzb.hellospring.domain.Girl;
+import com.zhangzb.hellospring.domain.Result;
 import com.zhangzb.hellospring.repository.GirlRepository;
 import com.zhangzb.hellospring.service.GirlService;
+import com.zhangzb.hellospring.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,7 @@ public class GirlController {
      */
     @GetMapping(value = "/getGirls")
     public List<Girl>girlList(){
-//          System.out.println("girlList 2222222222");
-            logger.info("girlList:22222");
+        logger.info("girlList:22222");
         return  girlRepository.findAll();
 
     }
@@ -42,15 +43,15 @@ public class GirlController {
      */
 
     @PostMapping(value = "/addGirl")
-    public Girl addGirl(@Valid Girl girl, BindingResult bindingResult){
+    public Result<Girl> addGirl(@Valid Girl girl, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return  null;
+            return  ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
 
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
-        return girlRepository.save(girl);
+
+        return ResultUtil.success(girlRepository.save(girl));
 
     }
 

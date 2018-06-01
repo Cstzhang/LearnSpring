@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 //@EntityScan\
 //@entity
@@ -15,6 +16,16 @@ public class Girl {
     @GeneratedValue
     private Integer id;
     private String cupSize;
+    @NotNull
+    private Integer money;
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
 
     @Min(value = 18,message = "未成年禁止入内!")
     private Integer age;
