@@ -1,6 +1,8 @@
 package com.zhangzb.hellospring.service;
 
 import com.zhangzb.hellospring.domain.Girl;
+import com.zhangzb.hellospring.enums.ResultEnums;
+import com.zhangzb.hellospring.exception.GirlException;
 import com.zhangzb.hellospring.repository.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,4 +26,18 @@ public class GirlService {
         girlRepository.save(girlB);
 
     }
+
+    public void searchGirl(Integer id) throws Exception {
+        Girl girl = girlRepository.findById(id).get();
+        Integer age = girl.getAge();
+        if (age <10){
+            throw new GirlException(ResultEnums.PRIMARY_SCHOOL);
+
+        }else if (age >10 && age <16) {
+            throw new GirlException(ResultEnums.MIDDLE_SCHOOL);
+        }
+
+    }
+
+
 }

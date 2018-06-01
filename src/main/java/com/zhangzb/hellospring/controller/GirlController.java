@@ -46,6 +46,7 @@ public class GirlController {
     public Result<Girl> addGirl(@Valid Girl girl, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return  ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
+//            return null;
         }
 
         girl.setCupSize(girl.getCupSize());
@@ -106,13 +107,26 @@ public class GirlController {
         return girlRepository.findByAgeAndCupSize(age,cupSize);
     }
 
-
+    /**
+     * 添加2个女孩
+     */
     @PostMapping(value = "addTwoGirl")
     public void addTwoGirl() {
 
       girlService.insertTwoGirl();
 
     }
+
+    /**
+     * 查找girl 并处理
+     * @param id
+     * @throws Exception
+     */
+    @GetMapping(value = "searchGirl/{id}")
+    public void searchGirlByAge(@PathVariable("id") Integer id) throws Exception {
+     girlService.searchGirl(id);
+    }
+
 
 
 
