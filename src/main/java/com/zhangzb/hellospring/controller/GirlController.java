@@ -1,8 +1,11 @@
 package com.zhangzb.hellospring.controller;
 
+import com.zhangzb.hellospring.aspect.HttpAspect;
 import com.zhangzb.hellospring.domain.Girl;
 import com.zhangzb.hellospring.repository.GirlRepository;
 import com.zhangzb.hellospring.service.GirlService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -14,6 +17,8 @@ import java.util.List;
 
 @RestController
 public class GirlController {
+    private final static Logger logger = LoggerFactory.getLogger(GirlController.class);
+
     @Autowired
     private GirlRepository girlRepository;
 
@@ -25,8 +30,10 @@ public class GirlController {
      */
     @GetMapping(value = "/getGirls")
     public List<Girl>girlList(){
-
+//          System.out.println("girlList 2222222222");
+            logger.info("girlList:22222");
         return  girlRepository.findAll();
+
     }
 
     /**
