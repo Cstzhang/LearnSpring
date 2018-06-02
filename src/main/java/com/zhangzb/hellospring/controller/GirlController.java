@@ -46,12 +46,10 @@ public class GirlController {
     public Result<Girl> addGirl(@Valid Girl girl, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return  ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
-//            return null;
         }
 
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
-
         return ResultUtil.success(girlRepository.save(girl));
 
     }
@@ -126,12 +124,6 @@ public class GirlController {
     public void searchGirlByAge(@PathVariable("id") Integer id) throws Exception {
      girlService.searchGirl(id);
     }
-
-
-
-
-
-
 
 
 }
